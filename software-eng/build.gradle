@@ -1,0 +1,30 @@
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.hamcrest:hamcrest-all:1.3'
+    testImplementation 'com.github.stefanbirkner:system-rules:1.19.0'
+    testImplementation 'commons-cli:commons-cli:1.5.0'
+}
+
+sourceSets {
+    test {
+        java {
+            srcDirs = ['.']
+        }
+    }
+}
+
+processResources {
+    from(sourceSets.test.java.srcDirs) {
+        include '**/*.properties'
+    }
+}
+
+test {
+    useJUnit()
+}
