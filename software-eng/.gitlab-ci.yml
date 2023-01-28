@@ -1,0 +1,22 @@
+stages:
+  - build
+  - test
+
+javac:
+  stage: build
+  image: gradle:jdk12
+  script:
+  - gradle compileTestJava
+
+junit:
+  stage: test
+  image: gradle:jdk12
+  script:
+  - gradle test
+  artifacts:
+    when: always
+    paths:
+      - build/
+    reports:
+      junit:
+        - build/test-results/test/**/TEST-*.xml
